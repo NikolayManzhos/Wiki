@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
 
-@Module(includes = arrayOf(ApiModule::class, DbModule::class))
+@Module(includes = arrayOf(ApiModule::class))
 class DataModule {
 
     @Provides
