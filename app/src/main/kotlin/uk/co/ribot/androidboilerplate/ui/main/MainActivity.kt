@@ -13,7 +13,6 @@ class MainActivity : BaseActivity(), OnPlayClickListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         ButterKnife.bind(this)
-
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                     .replace(R.id.contentFrame, FragmentMain())
