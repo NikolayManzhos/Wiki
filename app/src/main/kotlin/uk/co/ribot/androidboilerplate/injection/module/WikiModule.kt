@@ -2,6 +2,7 @@ package uk.co.ribot.androidboilerplate.injection.module
 
 import dagger.Module
 import dagger.Provides
+import uk.co.ribot.androidboilerplate.data.ParseInteractor
 import uk.co.ribot.androidboilerplate.injection.PerFragment
 import uk.co.ribot.androidboilerplate.ui.web.WikiPresenter
 
@@ -14,6 +15,6 @@ class WikiModule {
 
     @Provides
     @PerFragment
-    fun provideWebPresenter() = WikiPresenter()
+    fun provideWebPresenter(interactor: ParseInteractor) = WikiPresenter(interactor)
 
 }

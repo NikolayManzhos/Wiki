@@ -7,22 +7,27 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.TextView
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import uk.co.ribot.androidboilerplate.App
 import uk.co.ribot.androidboilerplate.R
+import uk.co.ribot.androidboilerplate.data.model.RandomWiki
+import uk.co.ribot.androidboilerplate.data.model.WikiPage
+import uk.co.ribot.androidboilerplate.data.model.random.Random
+import uk.co.ribot.androidboilerplate.data.model.random.RandomResponse
 import uk.co.ribot.androidboilerplate.util.WikiWebViewClient
+import uk.co.ribot.androidboilerplate.util.extension.replaceSpaces
 import javax.inject.Inject
 
 
 class FragmentWiki : Fragment(), WikiContract.View {
-
     @Inject
     lateinit var presenter: WikiPresenter
 
-    private lateinit var urlSource: String
-    private lateinit var urlDest: String
+    private lateinit var sourceTitle: String
 
+    private lateinit var destTitle: String
     @BindView(R.id.web_wiki)
     lateinit var webViewWiki: WebView
 
@@ -31,14 +36,14 @@ class FragmentWiki : Fragment(), WikiContract.View {
 
     companion object {
 
-        private val ARG_SOURCE_URL = "source_url"
-        private val ARG_DEST_URL = "destination_url"
+        private val ARG_RESPONCE_SOURCE_TITLE = "random_response_source_title"
 
-        fun newInstance(source: String, dest: String): FragmentWiki {
+        private val ARG_RESPONCE_DEST_TITLE = "random_response_dest_title"
+        fun newInstance(randomResponse: RandomResponse): FragmentWiki {
             val fragment = FragmentWiki()
             val args = Bundle()
-            args.putString(ARG_SOURCE_URL, source)
-            args.putString(ARG_DEST_URL, dest)
+            args.putString(ARG_RESPONCE_SOURCE_TITLE, randomResponse.query.random[0].title)
+            args.putString(ARG_RESPONCE_DEST_TITLE, randomResponse.query.random[1].title)
             fragment.arguments = args
             return fragment
         }
@@ -48,8 +53,8 @@ class FragmentWiki : Fragment(), WikiContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (arguments != null) {
-            urlSource = arguments.getString(ARG_SOURCE_URL)
-            urlDest = arguments.getString(ARG_DEST_URL)
+            sourceTitle = arguments.getString(ARG_RESPONCE_SOURCE_TITLE).replaceSpaces()
+            destTitle = arguments.getString(ARG_RESPONCE_DEST_TITLE).replaceSpaces()
         }
     }
 
@@ -59,9 +64,15 @@ class FragmentWiki : Fragment(), WikiContract.View {
         ButterKnife.bind(this, view)
         App.plusWiki().inject(this)
         presenter.attachView(this)
-        presenter.init(urlSource, urlDest)
-        webViewWiki.webViewClient = WikiWebViewClient()
+        presenter.init(sourceTitle, destTitle)
+        val wikiWebViewClient = WikiWebViewClient()
+        wikiWebViewClient.setOnUrlClickListener(presenter::onUrlSelected)
+        webViewWiki.webViewClient = wikiWebViewClient
         return view
+    }
+
+    override fun onWin() {
+        Toast.makeText(context, "You won!", Toast.LENGTH_LONG).show()
     }
 
     override fun onDestroyView() {
@@ -79,6 +90,7 @@ class FragmentWiki : Fragment(), WikiContract.View {
     }
 
     override fun showError() {
+        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
     }
 
 }

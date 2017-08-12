@@ -1,11 +1,9 @@
 package uk.co.ribot.androidboilerplate.ui.main
 
 import android.os.Bundle
-import android.widget.Toast
 import butterknife.ButterKnife
 import uk.co.ribot.androidboilerplate.R
 import uk.co.ribot.androidboilerplate.ui.base.BaseActivity
-import uk.co.ribot.androidboilerplate.ui.web.FragmentWiki
 
 class MainActivity : BaseActivity() {
   
