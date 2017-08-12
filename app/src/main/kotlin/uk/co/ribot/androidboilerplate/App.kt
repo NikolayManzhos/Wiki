@@ -5,12 +5,29 @@ import android.support.annotation.VisibleForTesting
 import timber.log.Timber
 import uk.co.ribot.androidboilerplate.injection.component.ApplicationComponent
 import uk.co.ribot.androidboilerplate.injection.component.DaggerApplicationComponent
+import uk.co.ribot.androidboilerplate.injection.component.WikiSubcomponent
 import uk.co.ribot.androidboilerplate.injection.module.ApplicationModule
+import uk.co.ribot.androidboilerplate.injection.module.WikiModule
 
-open class BoilerplateApplication: Application() {
+open class App : Application() {
 
-    lateinit var applicationComponent: ApplicationComponent
-        private set
+    companion object {
+
+        lateinit var applicationComponent: ApplicationComponent
+            private set
+
+        var wikiSubcomponent: WikiSubcomponent? = null
+            private set
+
+        fun plusWiki(): WikiSubcomponent {
+            if (wikiSubcomponent == null) wikiSubcomponent = applicationComponent.plus(WikiModule())
+            return wikiSubcomponent as WikiSubcomponent
+        }
+
+        fun clearWiki() {
+            wikiSubcomponent = null
+        }
+    }
 
     override fun onCreate() {
         super.onCreate()
@@ -28,4 +45,6 @@ open class BoilerplateApplication: Application() {
                 .applicationModule(ApplicationModule(this))
                 .build()
     }
+
+
 }
