@@ -10,8 +10,8 @@ import uk.co.ribot.androidboilerplate.data.model.random.RandomResponse
  */
 interface WikiService {
     @GET("")
-    fun getWiki(@Query("curid") pageId: kotlin.Int): Single<String>
-    
+    fun getWiki(@Query("curid") pageId: String): Single<String>
+
     @GET("w/api.php?action=query&format=json&list=random&rnnamespace=0&rnlimit=2")
     fun getRandom() : Single<RandomResponse>
 }
