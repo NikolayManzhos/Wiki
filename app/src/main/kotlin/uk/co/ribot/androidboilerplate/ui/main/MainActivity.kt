@@ -8,7 +8,7 @@ import uk.co.ribot.androidboilerplate.ui.base.BaseActivity
 import uk.co.ribot.androidboilerplate.ui.web.FragmentWiki
 
 class MainActivity : BaseActivity(), OnPlayClickListener {
-  
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,6 +23,7 @@ class MainActivity : BaseActivity(), OnPlayClickListener {
     override fun onPlayClick(randomResponse: RandomResponse) {
         supportFragmentManager.beginTransaction()
                 .replace(R.id.contentFrame, FragmentWiki.newInstance(randomResponse))
+                .addToBackStack(null)
                 .commit()
     }
 }

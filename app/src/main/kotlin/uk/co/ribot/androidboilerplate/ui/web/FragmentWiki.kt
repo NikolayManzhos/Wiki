@@ -34,6 +34,8 @@ class FragmentWiki : Fragment(), WikiContract.View {
 
     companion object {
 
+        private val ARG_SOURCE_URL = "source_url"
+        private val ARG_DEST_URL = "dest_url"
         private val ARG_RESPONCE_SOURCE_TITLE = "random_response_source_title"
 
         private val ARG_RESPONCE_DEST_TITLE = "random_response_dest_title"
