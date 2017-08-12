@@ -27,6 +27,10 @@ class ParseInteractor @Inject constructor(private val dataManager: DataManager) 
                 .map { WikiPage(it) }
     }
 
-    fun getTitleFromUrl(url: String) = Regex("[/]([\\s\\S]|[^/]+)\$").find(url)!!.value
+    fun getTitleFromUrl(url: String): String {
+        val title = Regex("[/]([\\s\\S]|[^/]+)\$").find(url)!!.value
+        Timber.e("Parsing $url - $title")
+        return title
+    }
 
 }

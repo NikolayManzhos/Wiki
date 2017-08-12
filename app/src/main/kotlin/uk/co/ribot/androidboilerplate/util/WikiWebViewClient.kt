@@ -2,6 +2,7 @@ package uk.co.ribot.androidboilerplate.util
 
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import timber.log.Timber
 
 
 /**
@@ -14,6 +15,7 @@ class WikiWebViewClient : WebViewClient() {
     override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
         url?.let {
             onUrlClick?.invoke(it)
+            Timber.e("Url clicked - $it")
         }
         return false
     }

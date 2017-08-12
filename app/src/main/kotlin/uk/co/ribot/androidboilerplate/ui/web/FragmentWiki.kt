@@ -79,8 +79,9 @@ class FragmentWiki : Fragment(), WikiContract.View {
         App.clearWiki()
     }
 
-    override fun loadUrl(html: String) {
-        webViewWiki.loadData(html, null, "UTF-8")
+    override fun loadUrl(url: String) {
+        webViewWiki.loadUrl(url)
+//        webViewWiki.loadUrl(title)
     }
 
     override fun showClicks(i: Int) {

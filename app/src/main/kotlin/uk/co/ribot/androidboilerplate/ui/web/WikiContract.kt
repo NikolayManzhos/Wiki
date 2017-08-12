@@ -8,7 +8,7 @@ object WikiContract {
     interface View : MvpView {
         fun onWin()
         fun showClicks(i: Int)
-        fun loadUrl(html: String)
+        fun loadUrl(url: String)
         fun showError()
     }
 

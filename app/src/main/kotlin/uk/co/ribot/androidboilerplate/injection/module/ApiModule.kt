@@ -9,6 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import uk.co.ribot.androidboilerplate.util.LoggingInterceptor
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -25,11 +26,12 @@ class ApiModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient.Builder().addNetworkInterceptor(LoggingInterceptor()).build()
+        return OkHttpClient.Builder().addInterceptor(LoggingInterceptor()).build()
     }
 
     @Provides
     @Singleton
+    @Named("random")
     fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
                 .client(okHttpClient)
@@ -38,4 +40,16 @@ class ApiModule {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build()
     }
+
+    @Provides
+    @Singleton
+    @Named("page")
+    fun provideRetrofit2(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+                .client(okHttpClient)
+                .baseUrl("https://ru.m.wikipedia.org/")
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build()
+    }
+
 }

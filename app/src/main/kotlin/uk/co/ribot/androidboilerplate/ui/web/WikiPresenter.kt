@@ -3,7 +3,6 @@ package uk.co.ribot.androidboilerplate.ui.web
 import rx.Subscription
 import timber.log.Timber
 import uk.co.ribot.androidboilerplate.data.ParseInteractor
-import uk.co.ribot.androidboilerplate.data.model.WikiPage
 import uk.co.ribot.androidboilerplate.injection.ConfigPersistent
 import javax.inject.Inject
 
@@ -29,24 +28,14 @@ constructor(val interactor: ParseInteractor) : WikiContract.Presenter() {
         Timber.i("Init($source, $dest)")
         sourceTitle = source
         destTitle = dest
-        loadHtml(source)
+        onUrlSelected("https://ru.m.wikipedia.org/wiki/$source")
     }
 
     fun onUrlSelected(url: String) {
-        loadHtml(interactor.getTitleFromUrl(url))
-    }
-
-    private fun loadHtml(title: String) {
-        Timber.i("loadHtml($title)")
-        subscription = interactor.getParsed(title)
-                .subscribe({ page: WikiPage ->
-                    Timber.i("Html - ${page.html}")
-                    onHtmlLoaded(page.html, title) },
-                        { view.showError() })
+        onHtmlLoaded(url, interactor.getTitleFromUrl(url))
     }
 
     override fun onHtmlLoaded(url: String, title: String) {
-        Timber.i("Url click: $url")
         if (title != sourceTitle) {
             clicks++
             view.showClicks(clicks)
