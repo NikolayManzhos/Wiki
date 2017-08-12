@@ -32,13 +32,13 @@
         android:padding="16dp">
 
         <TextView
-            android:text="From"
             android:id="@+id/fromPage"
-            android:textSize="38sp"
+            android:textSize="34sp"
             android:textColor="@color/colorTextPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
             android:layout_gravity="center_horizontal"/>
 
         <ImageView
@@ -50,13 +50,13 @@
             android:layout_centerHorizontal="true" />
 
         <TextView
-            android:text="To"
             android:id="@+id/toPage"
-            android:textSize="38sp"
+            android:textSize="34sp"
             android:textColor="@color/colorTextPrimary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/downArrow"
+            android:gravity="center_horizontal"
             android:layout_centerInParent="true"
             android:layout_alignParentBottom="true" />
 

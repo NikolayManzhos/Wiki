@@ -12,6 +12,6 @@ interface WikiService {
     @GET("wiki/{pageName}")
     fun getWiki(@Path("pageName") pageName: String): Single<String>
 
-    @GET("/w/api.php?action=query&format=json&list=random&rnnamespace=0&rnlimit=1")
+    @GET("w/api.php?action=query&format=json&list=random&rnnamespace=0&rnlimit=2")
     fun getRandom() : Single<RandomResponse>
 }
