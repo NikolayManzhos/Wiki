@@ -9,11 +9,8 @@ import com.google.gson.annotations.SerializedName;
 public class Random {
 
     @SerializedName("id")
-    public int id;
-
-    @SerializedName("ns")
-    public int ns;
-
+    public String id;
+    
     @SerializedName("title")
     public String title;
 
