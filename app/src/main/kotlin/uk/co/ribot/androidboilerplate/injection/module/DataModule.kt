@@ -6,7 +6,9 @@ import android.content.SharedPreferences
 import dagger.Module
 import dagger.Provides
 import retrofit2.Retrofit
+import uk.co.ribot.androidboilerplate.data.remote.RandomService
 import uk.co.ribot.androidboilerplate.data.remote.WikiService
+import javax.inject.Named
 import javax.inject.Singleton
 
 @Module(includes = arrayOf(ApiModule::class))
@@ -21,8 +23,13 @@ class DataModule {
 
     @Provides
     @Singleton
-    fun provideWikiService(retrofit: Retrofit) : WikiService {
+    fun provideWikiService(@Named("page") retrofit: Retrofit) : WikiService {
         return retrofit.create(WikiService::class.java)
+    }
+    @Provides
+    @Singleton
+    fun provideRandService(@Named("random") retrofit: Retrofit) : RandomService {
+        return retrofit.create(RandomService::class.java)
     }
 
 }
