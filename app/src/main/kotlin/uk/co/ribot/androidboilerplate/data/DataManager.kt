@@ -9,7 +9,7 @@ import javax.inject.Singleton
 @Singleton
 class DataManager @Inject constructor(private val wikiService: WikiService) {
 
-    fun getWiki(): Single<WikiPage> = wikiService.getWiki().map { WikiPage(it) }
+    fun getWiki(pageName: String): Single<WikiPage> = wikiService.getWiki(pageName).map { WikiPage(it) }
 
 
 }
