@@ -12,6 +12,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import uk.co.ribot.androidboilerplate.App
 import uk.co.ribot.androidboilerplate.R
+import uk.co.ribot.androidboilerplate.data.model.random.RandomResponse
 import uk.co.ribot.androidboilerplate.util.WikiWebViewClient
 import javax.inject.Inject
 
@@ -33,12 +34,11 @@ class FragmentWiki : Fragment(), WikiContract.View {
 
         private val ARG_SOURCE_URL = "source_url"
 
-        private val ARG_DEST_URL = "destination_url"
-        fun newInstance(source: String, dest: String): FragmentWiki {
+        fun newInstance(randomResponse: RandomResponse): FragmentWiki {
             val fragment = FragmentWiki()
             val args = Bundle()
-            args.putString(ARG_SOURCE_URL, source)
-            args.putString(ARG_DEST_URL, dest)
+            args.putString(ARG_SOURCE_URL, randomResponse.query.random[0].title)
+            args.putString(ARG_DEST_URL, randomResponse.query.random[1].title)
             fragment.arguments = args
             return fragment
         }
