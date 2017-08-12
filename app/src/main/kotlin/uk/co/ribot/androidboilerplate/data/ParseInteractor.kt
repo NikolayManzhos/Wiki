@@ -2,6 +2,8 @@ package uk.co.ribot.androidboilerplate.data
 
 import org.jsoup.Jsoup
 import rx.Single
+import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 import timber.log.Timber
 import uk.co.ribot.androidboilerplate.data.model.WikiPage
 import javax.inject.Inject
@@ -16,6 +18,8 @@ class ParseInteractor @Inject constructor(private val dataManager: DataManager) 
 
     fun getParsed(query: String): Single<WikiPage> {
         return dataManager.getWiki(query)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .map { it.html }
                 .map { Jsoup.parse(it) }
                 .map { it.apply { this.getElementsByClass("header-container").remove() } }

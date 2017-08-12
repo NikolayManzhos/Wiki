@@ -33,6 +33,7 @@ class FragmentWiki : Fragment(), WikiContract.View {
     companion object {
 
         private val ARG_SOURCE_URL = "source_url"
+        private val ARG_DEST_URL = "dest_url"
 
         fun newInstance(randomResponse: RandomResponse): FragmentWiki {
             val fragment = FragmentWiki()
