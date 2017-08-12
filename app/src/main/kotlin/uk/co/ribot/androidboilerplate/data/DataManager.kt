@@ -1,23 +1,14 @@
 package uk.co.ribot.androidboilerplate.data
 
+import rx.Single
+import uk.co.ribot.androidboilerplate.data.model.WikiPage
+import uk.co.ribot.androidboilerplate.data.remote.WikiService
 import javax.inject.Inject
 import javax.inject.Singleton
 
-import rx.Observable
-import uk.co.ribot.androidboilerplate.data.local.DatabaseHelper
-import uk.co.ribot.androidboilerplate.data.model.Ribot
-import uk.co.ribot.androidboilerplate.data.remote.RibotsService
-
 @Singleton
-class DataManager @Inject constructor(private val ribotsService: RibotsService,
-                                      private val databaseHelper: DatabaseHelper) {
+class DataManager @Inject constructor(private val wikiService: WikiService) {
 
-    fun syncRibots(): Observable<Ribot> {
-        return ribotsService.getRibots()
-                .concatMap { databaseHelper.setRibots(it) }
-    }
+    fun getWiki(): Single<WikiPage> = wikiService.getWiki().map { WikiPage(it) }
 
-    fun getRibots(): Observable<List<Ribot>> {
-        return databaseHelper.getRibots().distinct()
-    }
 }
