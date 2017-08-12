@@ -11,4 +11,5 @@ class DataManager @Inject constructor(private val wikiService: WikiService) {
 
     fun getWiki(): Single<WikiPage> = wikiService.getWiki().map { WikiPage(it) }
 
+
 }
