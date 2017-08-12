@@ -9,7 +9,7 @@ import javax.inject.Inject
  */
 class ParseInteractor @Inject constructor(private val dataManager: DataManager) {
     fun getParsed(query: String): Single<WikiPage> {
-        return dataManager.getWiki()
+        return dataManager.getWiki(query)
         //return Single.just(DummyData().data)
         //.map { Jsoup.parse(it.html) }
         //.map { Jsoup.parse(it) }
