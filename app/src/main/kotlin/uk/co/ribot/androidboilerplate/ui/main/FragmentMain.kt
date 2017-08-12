@@ -1,8 +1,8 @@
 package uk.co.ribot.androidboilerplate.ui.main
 
 import android.os.Bundle
+import android.support.design.widget.FloatingActionButton
 import android.support.v4.app.Fragment
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,8 +20,11 @@ class FragmentMain: Fragment(), MainContract.View {
 
     @BindView(R.id.fromPage) lateinit var fromPage: TextView
     @BindView(R.id.toPage) lateinit var toPage: TextView
+    @BindView(R.id.playFab) lateinit var playFab: FloatingActionButton
 
     private lateinit var unbinder:Unbinder
+
+    private var randomResponse = RandomResponse()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater?.inflate(R.layout.fragment_main, container, false) as View
@@ -33,6 +36,9 @@ class FragmentMain: Fragment(), MainContract.View {
         (activity as MainActivity).activityComponent.inject(this)
         presenter.attachView(this)
         presenter.loadRandomArticles()
+        playFab.setOnClickListener {
+            (activity as MainActivity).onPlayClick(randomResponse)
+        }
     }
 
     override fun onDestroyView() {
@@ -42,6 +48,7 @@ class FragmentMain: Fragment(), MainContract.View {
     }
 
     override fun showArticles(randomResponse: RandomResponse) {
+        this.randomResponse = randomResponse
         fromPage.text = randomResponse.query.random[0].title
         toPage.text = randomResponse.query.random[1].title
     }

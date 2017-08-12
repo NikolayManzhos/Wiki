@@ -3,7 +3,7 @@ package uk.co.ribot.androidboilerplate.ui.base
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import timber.log.Timber
-import uk.co.ribot.androidboilerplate.BoilerplateApplication
+import uk.co.ribot.androidboilerplate.App
 import uk.co.ribot.androidboilerplate.injection.component.ActivityComponent
 import uk.co.ribot.androidboilerplate.injection.component.ConfigPersistentComponent
 import uk.co.ribot.androidboilerplate.injection.component.DaggerConfigPersistentComponent
@@ -37,7 +37,7 @@ open class BaseActivity: AppCompatActivity() {
         val configPersistentComponent = componentsMap.getOrPut(activityId, {
             Timber.i("Creating new ConfigPersistentComponent id=%d", activityId)
 
-            val component = (applicationContext as BoilerplateApplication).applicationComponent
+            val component = App.applicationComponent
 
             DaggerConfigPersistentComponent.builder()
                     .applicationComponent(component)
