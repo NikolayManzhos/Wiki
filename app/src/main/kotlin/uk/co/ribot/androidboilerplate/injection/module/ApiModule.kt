@@ -8,7 +8,6 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import uk.co.ribot.androidboilerplate.data.remote.RibotsService
 import javax.inject.Singleton
 
 @Module
@@ -30,13 +29,12 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideRibotsService(okHttpClient: OkHttpClient, gson: Gson): RibotsService {
+    fun provideRetrofit(okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
                 .client(okHttpClient)
-                .baseUrl("https://api.ribot.io/")
+                .baseUrl("https://ru.m.wikipedia.org")
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build()
-                .create(RibotsService::class.java)
     }
 }
