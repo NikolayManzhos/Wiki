@@ -12,6 +12,6 @@ class DataManager @Inject constructor(private val wikiService: WikiService) {
 
     fun getWiki(pageName: String): Single<WikiPage> = wikiService.getWiki(pageName).map { WikiPage(it) }
 
-    fun getRandom() : Single<RandomResponse> = wikiService.getRandom();
+    fun getRandom() : Single<RandomResponse> = wikiService.getRandom()
 
 }
