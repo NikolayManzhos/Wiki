@@ -11,6 +11,7 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import uk.co.ribot.androidboilerplate.App
 import uk.co.ribot.androidboilerplate.R
+import uk.co.ribot.androidboilerplate.util.WikiWebViewClient
 import javax.inject.Inject
 
 
@@ -59,6 +60,7 @@ class FragmentWiki : Fragment(), WikiContract.View {
         App.plusWiki().inject(this)
         presenter.attachView(this)
         presenter.init(urlSource, urlDest)
+        webViewWiki.webViewClient = WikiWebViewClient()
         return view
     }
 
