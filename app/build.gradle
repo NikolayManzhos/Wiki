@@ -61,9 +61,9 @@ repositories {
 
 dependencies {
     final SUPPORT_LIBRARY_VERSION = '26.0.0'
-    final DAGGER_VERSION          = '2.8'
-    final BUTTERKNIFE_VERSION     = '8.4.0'
-    final RETROFIT_VERSION        = '2.1.0'
+    final DAGGER_VERSION = '2.8'
+    final BUTTERKNIFE_VERSION = '8.4.0'
+    final RETROFIT_VERSION = '2.1.0'
 
     def daggerCompiler = "com.google.dagger:dagger-compiler:$DAGGER_VERSION"
 
@@ -77,15 +77,10 @@ dependencies {
     compile "com.android.support:support-annotations:$SUPPORT_LIBRARY_VERSION"
     compile "com.android.support:design:$SUPPORT_LIBRARY_VERSION"
 
-    provided "org.glassfish:javax.annotation:10.0-b28"
-    compile  "com.google.dagger:dagger:$DAGGER_VERSION"
+    compile "com.google.dagger:dagger:$DAGGER_VERSION"
     kapt daggerCompiler
 
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'io.reactivex:rxjava:1.1.6'
-    compile 'io.reactivex:rxkotlin:1.0.0'
 
-    compile 'com.jakewharton.timber:timber:4.4.0'
 
     compile "com.jakewharton:butterknife:$BUTTERKNIFE_VERSION"
     kapt "com.jakewharton:butterknife-compiler:$BUTTERKNIFE_VERSION"
@@ -94,6 +89,11 @@ dependencies {
     compile "com.squareup.retrofit2:converter-gson:$RETROFIT_VERSION"
     compile "com.squareup.retrofit2:adapter-rxjava:$RETROFIT_VERSION"
 
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.1.6'
+    compile 'io.reactivex:rxkotlin:1.0.0'
+    compile 'com.jakewharton.timber:timber:4.4.0'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
 }
 
 kapt {
