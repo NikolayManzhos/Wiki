@@ -4,7 +4,6 @@ import dagger.Subcomponent
 import uk.co.ribot.androidboilerplate.injection.PerActivity
 import uk.co.ribot.androidboilerplate.injection.module.ActivityModule
 import uk.co.ribot.androidboilerplate.ui.main.FragmentMain
-import uk.co.ribot.androidboilerplate.ui.main.MainActivity
 
 /**
  * This component inject dependencies to all Activities across the application

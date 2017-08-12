@@ -14,6 +14,6 @@ object WikiContract {
 
     abstract class Presenter : BasePresenter<View>() {
         abstract fun init(source: String, dest: String)
-        abstract fun onUrlSelected(url: String)
+        abstract fun onHtmlLoaded(url: String, title: String)
     }
 }
