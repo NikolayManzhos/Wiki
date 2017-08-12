@@ -4,19 +4,12 @@ import android.os.Bundle
 import android.widget.Toast
 import butterknife.ButterKnife
 import uk.co.ribot.androidboilerplate.R
-import uk.co.ribot.androidboilerplate.data.model.Ribot
 import uk.co.ribot.androidboilerplate.ui.base.BaseActivity
 import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainContract.View {
 
-    companion object {
-        val EXTRA_TRIGGER_SYNC_FLAG =
-                "uk.co.ribot.androidboilerplate.ui.main.MainActivity.EXTRA_TRIGGER_SYNC_FLAG"
-    }
-
     @Inject lateinit var presenter: MainPresenter
-    @Inject lateinit var ribotsAdapter: RibotsAdapter
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +26,10 @@ class MainActivity : BaseActivity(), MainContract.View {
                     .replace(R.id.contentFrame, FragmentMain())
                     .commit()
         }
+
+        presenter.attachView(this)
+        presenter.loadRibots()
+
     }
 
     override fun onDestroy() {
@@ -40,18 +37,10 @@ class MainActivity : BaseActivity(), MainContract.View {
         presenter.detachView()
     }
 
-    override fun showRibots(ribots: List<Ribot>) {
-        ribotsAdapter.ribots = ribots
-        ribotsAdapter.notifyDataSetChanged()
-    }
-
-    override fun showRibotsEmpty() {
-        ribotsAdapter.ribots = emptyList()
-        ribotsAdapter.notifyDataSetChanged()
-        Toast.makeText(this, R.string.empty_ribots, Toast.LENGTH_LONG).show()
+    override fun showEmpty() {
     }
 
     override fun showError() {
-        Toast.makeText(this, R.string.error_loading_ribots, Toast.LENGTH_LONG).show()
+        Toast.makeText(this, R.string.error_loading, Toast.LENGTH_LONG).show()
     }
 }
