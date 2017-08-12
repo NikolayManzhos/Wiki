@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:elevation="0dp">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:layout_scrollFlags="scroll|enterAlways|snap" />
+
+    </android.support.design.widget.AppBarLayout>
+
+    <RelativeLayout
+        android:id="@+id/contentContainer"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="56dp"
+        android:background="@color/colorPrimary"
+        android:padding="16dp">
+
+        <TextView
+            android:text="From"
+            android:id="@+id/fromPage"
+            android:textSize="38sp"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center_horizontal"/>
+
+        <ImageView
+            android:id="@+id/downArrow"
+            android:layout_width="100dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_down_arrow"
+            android:layout_below="@+id/fromPage"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text="To"
+            android:id="@+id/toPage"
+            android:textSize="38sp"
+            android:textColor="@color/colorTextPrimary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/downArrow"
+            android:layout_centerInParent="true"
+            android:layout_alignParentBottom="true" />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/favoriteFab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="70dp"
+        android:src="@drawable/ic_play_arrow_black_24dp"
+        app:backgroundTint="@color/colorTextPrimary"
+        app:layout_anchor="@+id/contentContainer"
+        app:layout_anchorGravity="bottom|center_horizontal" />
+
+</android.support.design.widget.CoordinatorLayout>
