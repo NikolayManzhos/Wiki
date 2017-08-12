@@ -6,6 +6,7 @@ import uk.co.ribot.androidboilerplate.ui.base.MvpView
 object WikiContract {
 
     interface View : MvpView {
+        fun onWin()
         fun showClicks(i: Int)
         fun loadUrl(url: String)
         fun showError()

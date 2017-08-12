@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebView
 import android.widget.TextView
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import uk.co.ribot.androidboilerplate.App
@@ -16,13 +17,12 @@ import javax.inject.Inject
 
 
 class FragmentWiki : Fragment(), WikiContract.View {
-
     @Inject
     lateinit var presenter: WikiPresenter
 
     private lateinit var urlSource: String
-    private lateinit var urlDest: String
 
+    private lateinit var urlDest: String
     @BindView(R.id.web_wiki)
     lateinit var webViewWiki: WebView
 
@@ -32,8 +32,8 @@ class FragmentWiki : Fragment(), WikiContract.View {
     companion object {
 
         private val ARG_SOURCE_URL = "source_url"
-        private val ARG_DEST_URL = "destination_url"
 
+        private val ARG_DEST_URL = "destination_url"
         fun newInstance(source: String, dest: String): FragmentWiki {
             val fragment = FragmentWiki()
             val args = Bundle()
@@ -60,7 +60,9 @@ class FragmentWiki : Fragment(), WikiContract.View {
         App.plusWiki().inject(this)
         presenter.attachView(this)
         presenter.init(urlSource, urlDest)
-        webViewWiki.webViewClient = WikiWebViewClient()
+        val wikiWebViewClient = WikiWebViewClient()
+        wikiWebViewClient.setOnUrlClickListener(presenter::onUrlSelected)
+        webViewWiki.webViewClient = wikiWebViewClient
         return view
     }
 
@@ -70,15 +72,20 @@ class FragmentWiki : Fragment(), WikiContract.View {
         App.clearWiki()
     }
 
-    override fun loadUrl(url: String) {
-        webViewWiki.loadUrl(url)
-    }
-
     override fun showClicks(i: Int) {
         textClicks.text = "$i clicks"
     }
 
+    override fun onWin() {
+        Toast.makeText(this.context, "You won!", Toast.LENGTH_LONG).show()
+    }
+
+    override fun loadUrl(url: String) {
+        webViewWiki.loadUrl(url)
+    }
+
     override fun showError() {
+        Toast.makeText(this.context, "Error", Toast.LENGTH_LONG).show()
     }
 
 }

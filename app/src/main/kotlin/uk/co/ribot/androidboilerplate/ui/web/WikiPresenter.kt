@@ -1,6 +1,7 @@
 package uk.co.ribot.androidboilerplate.ui.web
 
 import rx.Subscription
+import timber.log.Timber
 import uk.co.ribot.androidboilerplate.injection.ConfigPersistent
 import javax.inject.Inject
 
@@ -23,16 +24,19 @@ constructor() : WikiContract.Presenter() {
     }
 
     override fun init(source: String, dest: String) {
+        Timber.i("Initializing with source [$source] and destination [$dest]")
         sourceUrl = source
         destUrl = dest
         onUrlSelected(source)
     }
 
     override fun onUrlSelected(url: String) {
+        Timber.i("Url click: $url")
         if (url != sourceUrl) {
             clicks++
             view.showClicks(clicks)
         }
+        if (url == destUrl) view.onWin()
         view.loadUrl(url)
     }
 
