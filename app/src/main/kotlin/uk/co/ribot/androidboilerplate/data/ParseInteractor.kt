@@ -2,8 +2,8 @@ package uk.co.ribot.androidboilerplate.data
 
 import org.jsoup.Jsoup
 import rx.Single
+import timber.log.Timber
 import uk.co.ribot.androidboilerplate.data.model.WikiPage
-import java.util.regex.Pattern
 import javax.inject.Inject
 
 /**
@@ -13,6 +13,7 @@ class ParseInteractor @Inject constructor(private val dataManager: DataManager) 
 
     fun getParsed(query: String): Single<WikiPage> {
         return dataManager.getWiki(query)
+                .doOnEach { Timber.e(it.toString()) }
                 .map { it.html }
                 .map { Jsoup.parse(it) }
                 .map { it.apply { this.getElementsByClass("header-container").remove() } }
@@ -26,10 +27,6 @@ class ParseInteractor @Inject constructor(private val dataManager: DataManager) 
                 .map { WikiPage(it) }
     }
 
-    fun getTitleFromUrl(url: String): String {
-        val pattern = Pattern.compile("[/]([\\s\\S]|[^/]+)\$", Pattern.CASE_INSENSITIVE)
-        return pattern.matcher(url).replaceAll("")
-    }
-
+    fun getTitleFromUrl(url: String) = Regex("[/]([\\s\\S]|[^/]+)\$").find(url)!!.value
 
 }

@@ -12,9 +12,6 @@ import butterknife.BindView
 import butterknife.ButterKnife
 import uk.co.ribot.androidboilerplate.App
 import uk.co.ribot.androidboilerplate.R
-import uk.co.ribot.androidboilerplate.data.model.RandomWiki
-import uk.co.ribot.androidboilerplate.data.model.WikiPage
-import uk.co.ribot.androidboilerplate.data.model.random.Random
 import uk.co.ribot.androidboilerplate.data.model.random.RandomResponse
 import uk.co.ribot.androidboilerplate.util.WikiWebViewClient
 import uk.co.ribot.androidboilerplate.util.extension.replaceSpaces
@@ -22,6 +19,7 @@ import javax.inject.Inject
 
 
 class FragmentWiki : Fragment(), WikiContract.View {
+
     @Inject
     lateinit var presenter: WikiPresenter
 
@@ -81,8 +79,8 @@ class FragmentWiki : Fragment(), WikiContract.View {
         App.clearWiki()
     }
 
-    override fun loadUrl(url: String) {
-        webViewWiki.loadUrl(url)
+    override fun loadUrl(html: String) {
+        webViewWiki.loadData(html, null, "UTF-8")
     }
 
     override fun showClicks(i: Int) {
@@ -90,7 +88,6 @@ class FragmentWiki : Fragment(), WikiContract.View {
     }
 
     override fun showError() {
-        Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
     }
 
 }

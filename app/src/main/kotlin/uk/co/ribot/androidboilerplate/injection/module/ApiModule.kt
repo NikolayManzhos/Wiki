@@ -8,6 +8,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import uk.co.ribot.androidboilerplate.util.LoggingInterceptor
 import javax.inject.Singleton
 
 @Module
@@ -24,7 +25,7 @@ class ApiModule {
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient {
-        return OkHttpClient()
+        return OkHttpClient.Builder().addNetworkInterceptor(LoggingInterceptor()).build()
     }
 
     @Provides

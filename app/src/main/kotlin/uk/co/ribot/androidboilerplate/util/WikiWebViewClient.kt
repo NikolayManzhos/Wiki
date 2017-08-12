@@ -21,5 +21,4 @@ class WikiWebViewClient : WebViewClient() {
     fun setOnUrlClickListener(listener: (String) -> Unit) {
         onUrlClick = listener
     }
-
 }

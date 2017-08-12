@@ -3,6 +3,7 @@ package uk.co.ribot.androidboilerplate.ui.web
 import rx.Subscription
 import timber.log.Timber
 import uk.co.ribot.androidboilerplate.data.ParseInteractor
+import uk.co.ribot.androidboilerplate.data.model.WikiPage
 import uk.co.ribot.androidboilerplate.injection.ConfigPersistent
 import javax.inject.Inject
 
@@ -25,6 +26,7 @@ constructor(val interactor: ParseInteractor) : WikiContract.Presenter() {
     }
 
     override fun init(source: String, dest: String) {
+        Timber.i("Init($source, $dest)")
         sourceTitle = source
         destTitle = dest
         loadHtml(source)
@@ -35,8 +37,12 @@ constructor(val interactor: ParseInteractor) : WikiContract.Presenter() {
     }
 
     private fun loadHtml(title: String) {
+        Timber.i("loadHtml($title)")
         subscription = interactor.getParsed(title)
-                .subscribe({ (html) -> onHtmlLoaded(html, title) }, { view.showError() })
+                .subscribe({ page: WikiPage ->
+                    Timber.i("Html - ${page.html}")
+                    onHtmlLoaded(page.html, title) },
+                        { view.showError() })
     }
 
     override fun onHtmlLoaded(url: String, title: String) {
