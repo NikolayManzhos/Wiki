@@ -2,7 +2,6 @@ package uk.co.ribot.androidboilerplate
 
 import android.app.Application
 import android.support.annotation.VisibleForTesting
-import com.squareup.leakcanary.LeakCanary
 import timber.log.Timber
 import uk.co.ribot.androidboilerplate.injection.component.ApplicationComponent
 import uk.co.ribot.androidboilerplate.injection.component.DaggerApplicationComponent
@@ -15,10 +14,6 @@ open class BoilerplateApplication: Application() {
 
     override fun onCreate() {
         super.onCreate()
-
-        if (LeakCanary.isInAnalyzerProcess(this))
-            return
-        LeakCanary.install(this)
 
         if (BuildConfig.DEBUG) {
             Timber.plant(Timber.DebugTree())

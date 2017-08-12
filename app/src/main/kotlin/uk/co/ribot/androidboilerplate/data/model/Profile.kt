@@ -1,6 +1,6 @@
 package uk.co.ribot.androidboilerplate.data.model
 
-import java.util.Date
+import java.util.*
 
 data class Profile(
         val name: Name,

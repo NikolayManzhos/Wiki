@@ -8,7 +8,7 @@ import uk.co.ribot.androidboilerplate.injection.component.ActivityComponent
 import uk.co.ribot.androidboilerplate.injection.component.ConfigPersistentComponent
 import uk.co.ribot.androidboilerplate.injection.component.DaggerConfigPersistentComponent
 import uk.co.ribot.androidboilerplate.injection.module.ActivityModule
-import java.util.HashMap
+import java.util.*
 import java.util.concurrent.atomic.AtomicLong
 
 open class BaseActivity: AppCompatActivity() {
